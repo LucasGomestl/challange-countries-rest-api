@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import { ReactComponent as Moon } from "../assets/moon-regular.svg";
+import { ReactComponent as RegularMoon } from "../assets/moon-regular.svg";
+import { ReactComponent as SolidMoon } from "../assets/moon-solid.svg";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -10,6 +11,7 @@ const StyledHeader = styled.header`
   height: 100px;
   font-weight: bold;
   background-color: #fff;
+  box-shadow: 5px 15px 14px -6px rgba(0, 0, 0, 0.44);
   @media (max-width: 660px) {
     font-size: 12px;
   }
@@ -27,20 +29,32 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Icon = styled(Moon)`
+const IconLight = styled(RegularMoon)`
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+`;
+
+const IconDark = styled(SolidMoon)`
   width: 25px;
   height: 25px;
   margin-right: 10px;
 `;
 
 const Header = () => {
+  let [dark, setDark] = useState(false);
   return (
     <StyledHeader>
       <h1>Where in the world?</h1>
-      <Button>
-        <Icon />
-        Dark Mode
-      </Button>
+      {dark === true ? (
+        <Button onClick={() => setDark(!dark)}>
+          <IconDark /> Light Mode
+        </Button>
+      ) : (
+        <Button onClick={() => setDark(!dark)}>
+          <IconLight /> Light Mode
+        </Button>
+      )}
     </StyledHeader>
   );
 };
