@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -60,10 +61,7 @@ const Card = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(
-        // "https://restcountries.eu/rest/v2/name/cuba"
-        "https://restcountries.eu/rest/v2/all"
-      );
+      const request = await axios.get("https://restcountries.eu/rest/v2/all");
       setCountries(request.data);
     }
     fetchData();
@@ -73,7 +71,7 @@ const Card = (props) => {
     <CardList>
       {countries.map((country) => (
         <ListItem key={country.name}>
-          <a aria-label={country.name} href="#">
+          <Link to={"/detail/" + country.name}>
             <StyledCard>
               <FlagContainer>
                 <Flag src={country.flag} alt={"Flag of " + country.name} />
@@ -91,7 +89,7 @@ const Card = (props) => {
                 </li>
               </CountryInfo>
             </StyledCard>
-          </a>
+          </Link>
         </ListItem>
       ))}
     </CardList>

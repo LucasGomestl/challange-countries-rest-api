@@ -3,20 +3,13 @@ import styled from "styled-components";
 
 import Header from "./Header";
 import Card from "./Card";
+import { MainWrapper } from "../styled/components";
 import { ReactComponent as SearchIcon } from "../assets/search.svg";
-
-const MainWrapper = styled.main`
-  padding-bottom: 5vh;
-  height: 100%;
-  background-color: hsl(0, 0%, 98%);
-  box-shadow: inset 5px 8px 10px -6px rgba(0, 0, 0, 0.1);
-`;
 
 const Filters = styled.div`
   display: grid;
   grid-template-columns: 20px 1fr 150px;
   align-items: center;
-  padding-top: 50px;
   @media (max-width: 820px) {
     grid-template-columns: 20px 1fr;
     > input {

@@ -17,7 +17,7 @@ const StyledHeader = styled.header`
   }
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   display: flex;
   align-items: center;
   width: 120px;
