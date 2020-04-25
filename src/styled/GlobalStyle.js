@@ -8,14 +8,17 @@ const Globals = createGlobalStyle`
     text-decoration: none;
     list-style: none;
   }
-  
+  body{
+    background-color: ${({ theme }) => theme.theme.background};
+  }
+
   #root > *{
-    padding-left: 10vw;
-    padding-right: 10vw;
+    padding-left: 7.5vw;
+    padding-right: 7.5vw;
   }
 
   a{
-    color: black
+    color: ${({ theme }) => theme.theme.color};
   }
 `;
 

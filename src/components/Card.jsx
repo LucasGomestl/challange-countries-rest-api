@@ -5,21 +5,30 @@ import styled from "styled-components";
 
 const CardList = styled.ul`
   display: grid;
-  grid-gap: 100px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 250px));
-  justify-content: center;
+  grid-gap: 60px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  justify-content: space-between;
   margin-top: 50px;
   list-style-type: none;
+  @media (max-width: 1660px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 250px));
+    grid-gap: 50px;
+  }
+  @media (max-width: 1372px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
+    grid-gap: 8vw;
+    justify-content: center;
+  }
 `;
 
 const ListItem = styled.li`
   height: 380px;
   width: 100%;
   border-radius: 5px;
-  background-color: white;
-  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2);
+  background-color: ${({ theme }) => theme.theme.elements};
+  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.3);
   font-size: 16px;
-  transition: all 0.2s;
+  transition: transform 0.2s;
   &:hover {
     transform: scale(1.05);
   }
@@ -71,7 +80,7 @@ const Card = (props) => {
     <CardList>
       {countries.map((country) => (
         <ListItem key={country.name}>
-          <Link to={"/detail/" + country.name}>
+          <Link to={"/detail/" + country.alpha3Code}>
             <StyledCard>
               <FlagContainer>
                 <Flag src={country.flag} alt={"Flag of " + country.name} />

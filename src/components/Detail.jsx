@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 import Header from "./Header";
-import { MainWrapper, Button } from "../styled/components";
+import { Button, MainWrapper } from "../styled/components";
 
 import { ReactComponent as Arrow } from "../assets/arrow.svg";
 
@@ -13,9 +13,9 @@ const Icon = styled(Arrow)`
   width: 17px;
   height: 17px;
   margin-right: 10px;
-  margin-top: -2px;
+  margin-top: 0px;
+  color: ${({ theme }) => theme.theme.color};
 `;
-
 const CountryInfo = styled.section`
   display: grid;
   grid-template-columns: 500px 1fr;
@@ -72,20 +72,19 @@ const Borders = styled.ul`
   }
 `;
 
-//Arrumar o tamanho das bandeiras e Deixar responsivo
 const Detail = () => {
   const [country, setCountry] = useState({});
-  const { countryName } = useParams();
+  const { countryCode } = useParams();
 
   useEffect(() => {
     async function getCountry() {
       const request = await axios.get(
-        "https://restcountries.eu/rest/v2/name/" + countryName
+        "https://restcountries.eu/rest/v2/alpha/" + countryCode
       );
-      setCountry(request.data[0]);
+      setCountry(request.data);
     }
     getCountry();
-  }, [countryName]);
+  }, [countryCode]);
 
   return (
     <>
@@ -148,9 +147,11 @@ const Detail = () => {
                 {Array.isArray(country.borders)
                   ? country.borders.map((country) => (
                       <li key={country}>
-                        <Button width="90px" height="25px">
-                          {country}
-                        </Button>
+                        <Link to={"/detail/" + country}>
+                          <Button width="90px" height="25px">
+                            {country}
+                          </Button>
+                        </Link>
                       </li>
                     ))
                   : []}

@@ -34,8 +34,12 @@ const SearchInput = styled.input`
   height: 45px;
   border-radius: 5px;
   border: none;
-  color: hsl(0, 0%, 52%);
-  box-shadow: -1px -1px 5px 0px rgba(0, 0, 0, 0.2);
+  color: ${({ theme }) => theme.theme.color};
+  background-color: ${({ theme }) => theme.theme.elements};
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+  &::placeholder {
+    color: ${({ theme }) => theme.theme.color};
+  }
 `;
 
 const RegionFilter = styled.select`
@@ -44,8 +48,9 @@ const RegionFilter = styled.select`
   height: 45px;
   border-radius: 5px;
   border: none;
-  color: hsl(0, 0%, 52%);
-  box-shadow: -1px -1px 5px 0px rgba(0, 0, 0, 0.2);
+  color: ${({ theme }) => theme.theme.color};
+  background-color: ${({ theme }) => theme.theme.elements};
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
 `;
 
 const StyledSearchIcon = styled(SearchIcon)`
@@ -53,6 +58,7 @@ const StyledSearchIcon = styled(SearchIcon)`
   height: 20px;
   margin-left: 13px;
   z-index: 1;
+  color: ${({ theme }) => theme.theme.color};
 `;
 
 const Home = () => {
