@@ -88,6 +88,7 @@ const Home = () => {
               dispatch(getCountries(e.target.value, searchSelectInput));
             }}
             placeholder="Search for country..."
+            value={searchTextInput}
           />
           <RegionFilter
             name="Filter"
