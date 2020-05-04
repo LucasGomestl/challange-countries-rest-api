@@ -1,12 +1,18 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import Header from "./Header";
 import Card from "./Card";
 import { MainWrapper } from "../styled/components";
 import { ReactComponent as SearchIcon } from "../assets/search.svg";
+import {
+  getCountries,
+  updateSearchTextInput,
+  updateSearchSelectInput,
+} from "../store/actions";
 
-const Filters = styled.div`
+const Filters = styled.form`
   display: grid;
   grid-template-columns: 20px 1fr 150px;
   align-items: center;
@@ -62,18 +68,39 @@ const StyledSearchIcon = styled(SearchIcon)`
 `;
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const searchTextInput = useSelector(
+    (state) => state.countries.searchTextInput
+  );
+  const searchSelectInput = useSelector(
+    (state) => state.countries.searchSelectInput
+  );
+
   return (
     <>
       <Header />
       <MainWrapper>
         <Filters>
           <StyledSearchIcon className="icon" />
-          <SearchInput placeholder="Search for country..." />
-          <RegionFilter name="Filter">
+          <SearchInput
+            onChange={(e) => {
+              dispatch(updateSearchTextInput(e.target.value));
+              dispatch(getCountries(e.target.value, searchSelectInput));
+            }}
+            placeholder="Search for country..."
+          />
+          <RegionFilter
+            name="Filter"
+            onChange={(e) => {
+              dispatch(updateSearchSelectInput(e.target.value));
+              dispatch(getCountries(searchTextInput, e.target.value));
+            }}
+          >
             <option defaultValue value="default">
               Filter by Region
             </option>
             <option value="africa">Africa</option>
+            <option value="americas">America</option>
             <option value="asia">Asia</option>
             <option value="europe">Europe</option>
             <option value="oceania">Oceania</option>

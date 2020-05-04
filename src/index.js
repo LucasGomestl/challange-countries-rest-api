@@ -1,5 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import { applyMiddleware, createStore } from "redux";
+import { Provider } from "react-redux";
+import promise from "redux-promise";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import App from "./App";
+import reducer from "./store/rootReducer";
+
+const devTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const store = applyMiddleware(promise)(createStore)(reducer, devTools);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

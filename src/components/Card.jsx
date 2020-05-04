@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
+
+import { getCountries } from "../store/actions";
 
 const CardList = styled.ul`
   display: grid;
@@ -65,16 +67,16 @@ const CountryInfo = styled.ul`
   }
 `;
 
-const Card = (props) => {
-  const [countries, setCountries] = useState([]);
+//FORMATAR OS NUMEROS
+const Card = () => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get("https://restcountries.eu/rest/v2/all");
-      setCountries(request.data);
-    }
-    fetchData();
+    dispatch(getCountries());
   }, []);
+
+  const countries =
+    useSelector((state) => state.countries.countryList.data) || [];
 
   return (
     <CardList>
@@ -105,4 +107,7 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+const mapStateToProps = (state) => {
+  return { countries: state.countries };
+};
+export default connect(mapStateToProps)(Card);
