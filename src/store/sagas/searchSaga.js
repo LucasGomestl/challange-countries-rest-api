@@ -22,7 +22,7 @@ function* getCountries({ countryName, region }) {
       });
   } else {
     //Get by region and name
-    request = yield filterByRegion(countryName, region);
+    request = yield call(filterByRegion, countryName, region);
   }
   yield call(delay, 200);
   yield put(setCountries(request));
