@@ -24,7 +24,7 @@ function* getCountries({ countryName, region }) {
     //Get by region and name
     request = yield filterByRegion(countryName, region);
   }
-  yield call(delay, 250);
+  yield call(delay, 200);
   yield put(setCountries(request));
 }
 
