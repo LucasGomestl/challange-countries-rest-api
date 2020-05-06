@@ -11,9 +11,9 @@ basics of React, Redux Saga and Styled Components.**
 
 Build using:
 
-- REACT
-- REDUX SAGA
-- AXIOS
+- React
+- Redux Saga
+- Axios
 - Styled Components
 - CSS Grid
 - Flexbox
@@ -23,7 +23,7 @@ Build using:
 Clone the repo using Git:
 
 ```bash
-git clone https://github.com/LucasGomestl/challange-Countries-Rest-API.git
+git clone https://github.com/LucasGomestl/challange-countries-rest-api.git
 ```
 
 Install the dependencies:
