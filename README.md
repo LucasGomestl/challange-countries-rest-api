@@ -38,6 +38,6 @@ and start the app:
 npm start
 ```
 
-If you just want to see it running, <a href="https://lucasgomestl.github.io/challange-countries-rest-api/" target="_blank">click here</a>
+If you just want to see it running, <a href="https://challange-countries-rest-api.now.sh/" target="_blank">click here</a>
 
 That’s it! 🎉
