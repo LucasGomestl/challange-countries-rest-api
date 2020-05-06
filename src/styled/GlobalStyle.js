@@ -13,8 +13,8 @@ const Globals = createGlobalStyle`
   }
 
   #root > *{
-    padding-left: 7.5vw;
-    padding-right: 7.5vw;
+    padding-left: 7vw;
+    padding-right: 7vw;
   }
 
   a{

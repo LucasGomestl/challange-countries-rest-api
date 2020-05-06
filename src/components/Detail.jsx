@@ -9,6 +9,104 @@ import { Button, MainWrapper } from "../styled/components";
 
 import { ReactComponent as Arrow } from "../assets/arrow.svg";
 
+const Detail = () => {
+  const [country, setCountry] = useState({});
+  const { countryCode } = useParams();
+
+  useEffect(() => {
+    async function getCountry() {
+      const request = await axios.get(
+        "https://restcountries.eu/rest/v2/alpha/" + countryCode
+      );
+      setCountry(request.data);
+    }
+    getCountry();
+  }, [countryCode]);
+
+  function numberWithCommas(x = 0) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  return (
+    <>
+      <Header />
+      <MainWrapper>
+        <Link to="/">
+          <Button width="110px" height="33px">
+            <Icon /> Back
+          </Button>
+        </Link>
+        <CountryInfo>
+          <Flag src={country.flag} alt={"Flag of " + country.name} />
+          <DetailsList>
+            <h2>{country.name}</h2>
+            <DetailsAreaContainer className="AreaContainer">
+              <DetailsArea>
+                <li>
+                  <b>Native Name:</b> {country.nativeName}
+                </li>
+                <li>
+                  <b>Population:</b> {numberWithCommas(country.population)}
+                </li>
+                <li>
+                  <b>Region:</b> {country.region}
+                </li>
+                <li>
+                  <b>Sub Region:</b> {country.subregion}
+                </li>
+                <li>
+                  <b>Capital:</b> {country.capital}
+                </li>
+              </DetailsArea>
+
+              <DetailsArea>
+                <li>
+                  <b>Top Level Domain:</b> {country.topLevelDomain}
+                </li>
+                <li>
+                  <b>currencies:</b>{" "}
+                  {Array.isArray(country.currencies)
+                    ? country.currencies[0].name
+                    : []}
+                </li>
+                <li>
+                  <b>Languages:</b>{" "}
+                  {Array.isArray(country.languages)
+                    ? country.languages.map((language) =>
+                        language ===
+                        country.languages[country.languages.length - 1]
+                          ? language.name
+                          : language.name + ", "
+                      )
+                    : []}
+                </li>
+              </DetailsArea>
+            </DetailsAreaContainer>
+            <Borders className="borders">
+              <b>Border Countries:</b>
+              <div>
+                {Array.isArray(country.borders)
+                  ? country.borders.map((country) => (
+                      <li key={country}>
+                        <Link to={"/detail/" + country}>
+                          <Button width="90px" height="25px">
+                            {country}
+                          </Button>
+                        </Link>
+                      </li>
+                    ))
+                  : []}
+              </div>
+            </Borders>
+          </DetailsList>
+        </CountryInfo>
+      </MainWrapper>
+    </>
+  );
+};
+
+export default Detail;
+
 const Icon = styled(Arrow)`
   width: 17px;
   height: 17px;
@@ -71,97 +169,3 @@ const Borders = styled.ul`
     grid-gap: 10px;
   }
 `;
-
-const Detail = () => {
-  const [country, setCountry] = useState({});
-  const { countryCode } = useParams();
-
-  useEffect(() => {
-    async function getCountry() {
-      const request = await axios.get(
-        "https://restcountries.eu/rest/v2/alpha/" + countryCode
-      );
-      setCountry(request.data);
-    }
-    getCountry();
-  }, [countryCode]);
-
-  return (
-    <>
-      <Header />
-      <MainWrapper>
-        <Link to="/">
-          <Button width="110px" height="33px">
-            <Icon /> Back
-          </Button>
-        </Link>
-        <CountryInfo>
-          <Flag src={country.flag} alt={"Flag of " + country.name} />
-          <DetailsList>
-            <h2>{country.name}</h2>
-            <DetailsAreaContainer className="AreaContainer">
-              <DetailsArea>
-                <li>
-                  <b>Native Name:</b> {country.nativeName}
-                </li>
-                <li>
-                  <b>Population:</b> {country.population}
-                </li>
-                <li>
-                  <b>Region:</b> {country.region}
-                </li>
-                <li>
-                  <b>Sub Region:</b> {country.subregion}
-                </li>
-                <li>
-                  <b>Capital:</b> {country.capital}
-                </li>
-              </DetailsArea>
-
-              <DetailsArea>
-                <li>
-                  <b>Top Level Domain:</b> {country.topLevelDomain}
-                </li>
-                <li>
-                  <b>currencies:</b>{" "}
-                  {Array.isArray(country.currencies)
-                    ? country.currencies[0].name
-                    : []}
-                </li>
-                <li>
-                  <b>Languages:</b>{" "}
-                  {Array.isArray(country.languages)
-                    ? country.languages.map((language) =>
-                        language ===
-                        country.languages[country.languages.length - 1]
-                          ? language.name
-                          : language.name + ", "
-                      )
-                    : []}
-                </li>
-              </DetailsArea>
-            </DetailsAreaContainer>
-            <Borders className="borders">
-              <b>Border Countries:</b>
-              <div>
-                {Array.isArray(country.borders)
-                  ? country.borders.map((country) => (
-                      <li key={country}>
-                        <Link to={"/detail/" + country}>
-                          <Button width="90px" height="25px">
-                            {country}
-                          </Button>
-                        </Link>
-                      </li>
-                    ))
-                  : []}
-              </div>
-            </Borders>
-          </DetailsList>
-        </CountryInfo>
-      </MainWrapper>
-    </>
-  );
-};
-
-export default Detail;

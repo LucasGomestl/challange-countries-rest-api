@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SET_COUNTRIES":
-      console.log("ok");
       return { ...state, countryList: action.payload };
     case "UPDATE_SEARCH_TEXT_INPUT":
       return { ...state, searchTextInput: action.payload };

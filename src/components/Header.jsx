@@ -3,6 +3,17 @@ import styled from "styled-components";
 
 import ThemeSwitcher from "./ThemeSwitcher";
 
+const Header = () => {
+  return (
+    <StyledHeader>
+      <h1>Where in the world?</h1>
+      <ThemeSwitcher />
+    </StyledHeader>
+  );
+};
+
+export default Header;
+
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
@@ -22,14 +33,3 @@ const StyledHeader = styled.header`
     font-size: 7px;
   }
 `;
-
-const Header = () => {
-  return (
-    <StyledHeader>
-      <h1>Where in the world?</h1>
-      <ThemeSwitcher />
-    </StyledHeader>
-  );
-};
-
-export default Header;
